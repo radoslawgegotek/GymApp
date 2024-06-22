@@ -1,0 +1,92 @@
+erDiagram
+    CLUB{
+        INTEGER ID
+        VARCHAR(30) Name
+        VARCHAR(20) City
+        VARCHAR(50) Address
+        VARCHAR(11) PhoneNumber
+        VARCHAR(50) Mail
+    }
+    USER {
+        INTEGER ID
+        VARCHAR(30) Name
+        VARCHAR(30) Surname
+        VARCHAR(30) Mail
+        VARCHAR(30) Password
+        INTEGER Age
+        VARCHAR(11) PESEL
+        VARCHAR(11) PhoneNumber
+        INTEGER TicketID
+    }
+    CLASSES {
+        INTEGER ID
+        VARCHAR(30) Name
+        VARCHAR(30) Description
+        INTEGER Instructor
+        INTEGER FreePlaces
+        DATE Date
+        VARCHAR(30) Hours
+        INTEGER ClubID
+    }
+    RESERVATION {
+        INTEGER ID
+        INTEGER ClassesID
+        INTEGER UserID
+        DATE ReservationDate
+    }
+    TICKET {
+        INTEGER ID
+        VARCHAR(30) Name
+        DATE ShoppingDate
+        DATE StartDate
+        DATE ExpirationDate
+        INTEGER TicketTypeID
+    }
+    TICKET_TYPE{
+        INTEGER ID
+        VARCHAR(20) Name
+    }
+    CLUB_TICKET_TYPE{
+        INTEGER ID
+        INTEGER ClubID
+        INTEGER TicketTypeID
+    }
+    USER_ACTIVITY {
+        INTEGER ID
+        INTEGER UserID
+        INTEGER ClassesID
+    }
+    USER_PAYMENT {
+        INTEGER ID
+        INTEGER UserID
+        DATE Date
+        FLOAT Sum
+    }
+    ROLES{
+        INTEGER ID
+        VARCHAR(20) Name
+    }
+    USER_ROLES{
+        INTEGER ID
+        INTEGER UserID
+        INTEGER RoleID
+    }
+
+
+    CLUB ||--|{ CLUB_TICKET_TYPE : ""
+    CLUB_TICKET_TYPE }|--|| TICKET_TYPE : ""
+
+    CLUB ||--o{ CLASSES : ""
+    USER ||--o{ USER_ACTIVITY : ""
+    USER_ACTIVITY }o--|| CLASSES : ""
+
+    USER ||--o{ RESERVATION : ""
+    RESERVATION }O--|| CLASSES : ""
+
+    USER ||--o| TICKET : ""
+    TICKET }|--|| TICKET_TYPE : ""
+
+    USER ||--o{ USER_PAYMENT : ""
+
+    ROLES ||--|{ USER_ROLES : ""
+    USER ||--|{ USER_ROLES : ""
