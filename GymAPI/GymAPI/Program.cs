@@ -17,7 +17,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "GymAppClient",
+        policy =>
+        {
+            policy.WithOrigins(builder.Configuration.GetSection("AppConfig:Audience").Value!)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+        });
+});
+
 var app = builder.Build();
+app.UseCors("GymAppClient");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

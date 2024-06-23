@@ -1,5 +1,6 @@
 ﻿using Gym.DAL.Context;
 using Gym.Model.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,14 @@ namespace Gym.DAL
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder(IdentityConstants.ApplicationScheme, IdentityConstants.BearerScheme)
+                    .RequireAuthenticatedUser()
+                    .Build();
+
+                options.DefaultPolicy = policy;
+            });
             services.AddAuthentication(IdentityConstants.ApplicationScheme)
                 .AddBearerToken(IdentityConstants.BearerScheme);
             services.AddAuthorizationBuilder();

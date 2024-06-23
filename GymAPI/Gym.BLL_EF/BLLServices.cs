@@ -2,8 +2,10 @@
 using Gym.BLL.IServices;
 using Gym.BLL_EF.Repositories;
 using Gym.BLL_EF.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using System.Security.Claims;
 
 namespace Gym.BLL_EF
 {
@@ -12,6 +14,8 @@ namespace Gym.BLL_EF
         public static IServiceCollection AddBLL(this IServiceCollection services)
         {
             var assembly = Assembly.GetExecutingAssembly();
+
+            services.AddTransient<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
 
             services.AddScoped<IClassRepository, ClassRepository>();
             services.AddScoped<IClubRepository, ClubRepository>();
@@ -29,6 +33,7 @@ namespace Gym.BLL_EF
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<ITicketTypeService, TicketTypeService>();
             services.AddScoped<IUserPaymentService, UserPaymentService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddAutoMapper(assembly);
 

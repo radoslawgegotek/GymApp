@@ -1,0 +1,47 @@
+<mat-toolbar color="primary">
+	<a mat-fab
+	   extended
+	   color="accent"
+	   routerLink="/">
+		<mat-icon>home</mat-icon>
+		<span>GymApp</span>
+	</a>
+	<span class="example-spacer"></span>
+
+	@if(this.authService.user$ | async; as userInfo) {
+	<span>{{userInfo.email}}</span>
+	<button mat-icon-button
+			extended
+			color="info"
+			[matMenuTriggerFor]="menu">
+		<mat-icon>more_vert</mat-icon>
+	</button>
+	<mat-menu #menu="matMenu">
+		<button mat-menu-item>
+			<mat-icon>person</mat-icon>
+			Profile
+		</button>
+		<button mat-menu-item
+				(click)="logout()">
+			<mat-icon>exit_to_app</mat-icon>
+			Sign out
+		</button>
+	</mat-menu>
+	} @else {
+	<button mat-fab
+			color="accent"
+			extended
+			routerLink="login">
+		<mat-icon>person_add</mat-icon>
+		Sign In
+	</button>
+	}
+
+</mat-toolbar>
+
+@if(loaderService.isLoading | async) {
+<ng-container class="loader">
+	<mat-progress-bar color="accent"
+					  mode="indeterminate"></mat-progress-bar>
+</ng-container>
+}
