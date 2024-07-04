@@ -1,47 +1,61 @@
 <mat-toolbar color="primary">
-	<a mat-fab
-	   extended
-	   color="accent"
-	   routerLink="/">
+	<div class="home">
+		<button mat-button
+		routerLink="/">
 		<mat-icon>home</mat-icon>
 		<span>GymApp</span>
-	</a>
-	<span class="example-spacer"></span>
-
-	@if(this.authService.user$ | async; as userInfo) {
-	<span>{{userInfo.email}}</span>
-	<button mat-icon-button
-			extended
-			color="info"
-			[matMenuTriggerFor]="menu">
-		<mat-icon>more_vert</mat-icon>
+		</button>
+	</div>
+	<button mat-button
+	   [matMenuTriggerFor]="clubsMenu">
+	  <span>Kluby</span>
 	</button>
-	<mat-menu #menu="matMenu">
+	<button mat-button
+		routerLink="reserve-class">
+		<span>Zajęcia</span>
+	</button>
+	<button mat-button
+		routerLink="contact">
+  		<span>Kontakt</span>
+	</button>
+	<span class="example-spacer"></span>
+  
+	<ng-container *ngIf="(authService.user$ | async) as userInfo">
+	  <span>{{userInfo.email}}</span>
+	  <button mat-button
+			  [matMenuTriggerFor]="menu">
+		<mat-icon>more_vert</mat-icon>
+	  </button>
+	  <mat-menu #menu="matMenu">
 		<button mat-menu-item>
-			<mat-icon>person</mat-icon>
-			Profile
+		  <mat-icon>person</mat-icon>
+		  Profile
 		</button>
 		<button mat-menu-item
 				(click)="logout()">
-			<mat-icon>exit_to_app</mat-icon>
-			Sign out
+		  <mat-icon>exit_to_app</mat-icon>
+		  Sign out
 		</button>
-	</mat-menu>
-	} @else {
-	<button mat-fab
-			color="accent"
-			extended
-			routerLink="login">
+	  </mat-menu>
+	</ng-container>
+	<ng-container *ngIf="!(authService.user$ | async)">
+		<button mat-button
+			  routerLink="login">
 		<mat-icon>person_add</mat-icon>
 		Sign In
-	</button>
-	}
-
-</mat-toolbar>
-
-@if(loaderService.isLoading | async) {
-<ng-container class="loader">
-	<mat-progress-bar color="accent"
-					  mode="indeterminate"></mat-progress-bar>
-</ng-container>
-}
+	  </button>
+	</ng-container>
+  </mat-toolbar>
+  
+  <mat-menu #clubsMenu="matMenu">
+	<button mat-menu-item>Katowice</button>
+	<button mat-menu-item>Warszawa</button>
+	<button mat-menu-item>Kraków</button>
+  </mat-menu>
+  
+  <ng-container *ngIf="loaderService.isLoading | async">
+	<div class="loader">
+	  <mat-progress-bar color="accent"
+						mode="indeterminate"></mat-progress-bar>
+	</div>
+  </ng-container>

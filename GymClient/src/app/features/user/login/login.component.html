@@ -1,6 +1,6 @@
 <div class="container">
 	<mat-card>
-		<mat-card-header>Please, Sign In</mat-card-header>
+		<mat-card-header>Proszę się zalogować</mat-card-header>
 		<mat-card-content>
 			<form [formGroup]="form">
 				<div>
@@ -9,21 +9,21 @@
 						<input matInput
 							   formControlName="email" />
 						@if (form.get('email')?.hasError('required')) {
-						<mat-error>Email is <strong>required</strong></mat-error>
+						<mat-error>Email is <strong>wymagany</strong></mat-error>
 						}
 						@if (form.get('email')?.hasError('email')) {
-						<mat-error>Wrong <strong>email</strong></mat-error>
+						<mat-error>Zły <strong>email</strong></mat-error>
 						}
 					</mat-form-field>
 				</div>
 				<div>
 					<mat-form-field>
-						<mat-label>Password</mat-label>
+						<mat-label>Haslo</mat-label>
 						<input matInput
 							   formControlName="password"
 							   type="password" />
 						@if (form.get('password')?.hasError('required')) {
-						<mat-error>Password is <strong>required</strong></mat-error>
+						<mat-error>Haslo jest <strong>wymagane</strong></mat-error>
 						}
 						@if (form.get('password')?.hasError('minlength')
 						|| form.get('password')?.hasError('maxlength')) {
@@ -34,11 +34,9 @@
 				</div>
 			</form>
 			<div>
-				<button mat-flat-button
-						color="primary"
-						type="button"
-						(click)="loginUser()">
-					Sign In
+				<button mat-button
+				(click)="loginUser()">>
+				<span>Zaloguj się</span>
 				</button>
 			</div>
 		</mat-card-content>

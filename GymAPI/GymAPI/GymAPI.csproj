@@ -20,4 +20,6 @@
     <ProjectReference Include="..\Gym.DAL\Gym.DAL.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/appveyor.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

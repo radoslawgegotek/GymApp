@@ -1,0 +1,19 @@
+<div class="class-reservation-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz miasto</mat-label>
+      <mat-select formControlName="city">
+        <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <div class="classes-grid">
+      <button mat-raised-button *ngFor="let class of classes" (click)="reserveClass(class.id)">
+        <div>{{ class.name }}</div>
+        <div>{{ class.description }}</div>
+        <div>Slots: {{ class.slots }}</div>
+        <div>Start: {{ class.start | date:'short' }}</div>
+        <div>End: {{ class.end | date:'short' }}</div>
+      </button>
+    </div>
+  </div>
+  

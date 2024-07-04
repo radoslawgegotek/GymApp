@@ -1,16 +1,37 @@
 .example-spacer {
-	flex: 1 1 auto;
+	flex:  auto;
 }
 
 button {
 	margin: 2px;
+	color: white;
 }
 
 mat-toolbar {
 	height: 75px;
+	background-color: black;
+	color: rgb(255, 255, 255);
 }
+
 
 .loader {
 	width: 100%;
 	z-index: 1000;
 }
+
+a{
+	margin-right: 5px;
+}
+
+.home{
+	margin-right: 5px;
+}
+
+button:hover{
+	color:red;
+  }
+
+.mat-toolbar .mat-mdc-button-base.mat-mdc-button-base.mat-unthemed {
+	color:wheat;
+}
+  

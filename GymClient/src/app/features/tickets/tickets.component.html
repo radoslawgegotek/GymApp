@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="top-section">
+    <div class="column" *ngFor="let slide of slides">
+      <mat-card class="card">
+        <mat-card-title>{{ slide.title }}</mat-card-title>
+        <mat-card-content>{{ slide.description }}</mat-card-content>
+        <button mat-raised-button color="warn">
+          Kup bilet za {{ price }}
+        </button>
+      </mat-card>
+    </div>
+  </div>
+  <div class="bottom-section">
+    <mat-form-field>
+      <mat-label>Wybierz date rozpoczęcia</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div>
