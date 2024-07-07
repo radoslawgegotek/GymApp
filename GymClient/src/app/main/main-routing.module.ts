@@ -13,6 +13,7 @@ const routes: Routes = [
 	{
 		path: 'checkout-succeeded',
 		component: CheckoutSucceededComponent
+  },
   {
 		path: 'admin',
 		component: AdminComponent

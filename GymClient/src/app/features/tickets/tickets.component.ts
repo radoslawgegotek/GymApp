@@ -15,7 +15,7 @@ export class TicketsComponent implements OnInit {
 	ticketTypes: TicketTypeResponseDto[] = [];
 	selectedDate: Date | null = null;
 	dateForm: FormGroup;
-
+  showAlert: boolean = false;
 
 	constructor(private ticketService: TicketService, private paymentsService: PaymentsService, private fb: FormBuilder) {
 		this.dateForm = this.fb.group({
@@ -29,20 +29,17 @@ export class TicketsComponent implements OnInit {
 		});
 	}
 
-	createSession(ticketTypeId: number) {
-		this.paymentsService.requestMemberSession(ticketTypeId, this.selectedDate!);
-	}
+  createSession(ticketTypeId: number) {
+    if (this.dateForm.valid && this.selectedDate) {
+      this.paymentsService.requestMemberSession(ticketTypeId, this.selectedDate);
+    } else {
+      this.showAlert = true; 
+    }
+  }
 
   getPrice(ticketTypeId: number): string {
     let basePrice = 100;
     return `${basePrice + ((ticketTypeId - 1) * 20)} PLN`;
   }
 
-  submit() {
-    if (this.dateForm.valid) {
-      console.log('Wybrana data:', this.selectedDate);
-    } else {
-      console.log('Formularz jest nieprawidłowy');
-    }
-  }
 }
