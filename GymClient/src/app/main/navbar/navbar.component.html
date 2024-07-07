@@ -27,23 +27,27 @@
 		<mat-icon>more_vert</mat-icon>
 	  </button>
 	  <mat-menu #menu="matMenu">
-		<button mat-menu-item>
-		  <mat-icon>person</mat-icon>
-		  Profile
-		</button>
+		<button mat-menu-item (click)="navigateToProfile()">
+			<mat-icon>person</mat-icon>
+			Profile
+		  </button>
 		<button mat-menu-item
 				(click)="logout()">
 		  <mat-icon>exit_to_app</mat-icon>
-		  Sign out
+		  Wyloguj Sie
 		</button>
 	  </mat-menu>
 	</ng-container>
 	<ng-container *ngIf="!(authService.user$ | async)">
-		<button mat-button
-			  routerLink="login">
-		<mat-icon>person_add</mat-icon>
-		Sign In
-	  </button>
+		<button mat-button routerLink="login">
+			<mat-icon>person</mat-icon>
+			Zaloguj się
+		</button>
+		
+		<button mat-button routerLink="register">
+			<mat-icon>person_add</mat-icon>
+			Zarejestruj się
+		</button>
 	</ng-container>
   </mat-toolbar>
   

@@ -2,14 +2,14 @@ body {
   background-color: #000;
   color: #fff;
   font-family: Arial, sans-serif;
-  margin: 0; /* Reset marginesu dla body */
+  margin: 0; 
   height: 100vh; 
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  height: 80ch; /* Zmiana wysokości kontenera na 100vh, aby zajął całą wysokość ekranu */
+  height: 80ch; 
   padding: 20px;
   box-sizing: border-box;
 }
@@ -17,7 +17,7 @@ body {
 .top-section {
   display: flex;
   justify-content: space-between;
-  flex: 8; /* Górna sekcja zajmuje 80% wysokości kontenera */
+  flex: 8; 
   margin-bottom: 20px;
 }
 
@@ -37,7 +37,7 @@ body {
 }
 
 .bottom-section {
-  flex: 2; /* Dolna sekcja zajmuje 20% wysokości kontenera */
+  flex: 2; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -10,7 +10,6 @@ import { CoreModule } from './core/core.module';
 import { provideHttpClient } from '@angular/common/http';
 import { FeaturesModule } from './features/features.module';
 
-
 @NgModule({
 	declarations: [
 		AppComponent,

@@ -43,5 +43,12 @@ namespace GymAPI.Controllers
             var classes = await _classService.GetClasses(clubId, pageProperties);
             return Ok(classes);
         }
+
+        [HttpGet("Club/User/{classId}")]
+        public async Task<IActionResult> GetClassesByID([FromRoute] int classId, [FromQuery] PageProperties pageProperties)
+        {
+            var classes = await _classService.GetClassesById(classId, pageProperties);
+            return Ok(classes);
+        }
     }
 }
