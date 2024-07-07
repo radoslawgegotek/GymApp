@@ -1,25 +1,32 @@
 <div class="container">
-  <div class="top-section">
-    <div class="column" *ngFor="let ticketType of ticketTypes">
-      <mat-card class="card">
-        <mat-card-title>{{ ticketType.name }}</mat-card-title>
-        <mat-card-content>{{ ticketType.description }}</mat-card-content>
-        <button mat-raised-button color="warn" (click)="submit()">
-          Kup bilet za {{ getPrice(ticketType.id) }}
-        </button>
-      </mat-card>
-    </div>
-  </div>
-  <div class="bottom-section">
-    <mat-form-field>
-      <mat-label>Wybierz datę rozpoczęcia</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" required>
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="dateForm.controls['date'].hasError('required')">
-        Data jest wymagana
-      </mat-error>
-    </mat-form-field>
-  </div>
+	<div class="top-section">
+		<div class="column"
+			 *ngFor="let ticketType of ticketTypes">
+			<mat-card class="card">
+				<mat-card-title>{{ ticketType.name }}</mat-card-title>
+				<mat-card-content>{{ ticketType.description }}</mat-card-content>
+				<button mat-raised-button
+						color="warn"
+						(click)="createSession(ticketType.id)">
+					Kup bilet za {{ getPrice(ticketType.id) }}
+				</button>
+			</mat-card>
+		</div>
+	</div>
+	<div class="bottom-section">
+		<mat-form-field>
+			<mat-label>Wybierz datę rozpoczęcia</mat-label>
+			<input matInput
+				   [matDatepicker]="picker"
+				   [(ngModel)]="selectedDate"
+				   required>
+			<mat-hint>MM/DD/YYYY</mat-hint>
+			<mat-datepicker-toggle matIconSuffix
+								   [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+			<mat-error *ngIf="dateForm.controls['date'].hasError('required')">
+				Data jest wymagana
+			</mat-error>
+		</mat-form-field>
+	</div>
 </div>

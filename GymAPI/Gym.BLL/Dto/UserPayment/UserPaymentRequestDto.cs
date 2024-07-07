@@ -8,7 +8,7 @@ namespace Gym.BLL.Dto.UserPayment
 {
     public class UserPaymentRequestDto
     {
-        public double Price { get; set; }
-        public string UserId { get; set; }
+        public DateTime ExpirationDate { get; set; }
+        public int TicketTypeId { get; set; }
     }
 }

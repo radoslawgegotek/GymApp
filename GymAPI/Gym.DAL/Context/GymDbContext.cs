@@ -1,4 +1,5 @@
-﻿using Gym.Model.Models;
+﻿using Gym.BLL.IServices;
+using Gym.Model.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +15,13 @@ namespace Gym.DAL.Context
         public DbSet<TicketType> TicketTypes { get; set; }
         public DbSet<UserPayment> UserPayments { get; set; }
 
+        private readonly ICurrentUserService _userService;
 
-        public GymDbContext(DbContextOptions options) : base(options)
-        { }
+
+        public GymDbContext(DbContextOptions options, ICurrentUserService userService) : base(options)
+        {
+            _userService = userService;
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,7 +34,7 @@ namespace Gym.DAL.Context
             base.OnModelCreating(builder);
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             //foreach (var entry in ChangeTracker.Entries<AuditableEntitySoftDelete>())
             //{
@@ -47,16 +52,18 @@ namespace Gym.DAL.Context
                 {
                     case EntityState.Modified:
                         entry.Entity.UpdatedOn = DateTime.Now;
+                        entry.Entity.UpdatedBy = _userService.GetCurrnetUserId();
                         break;
                     case EntityState.Added:
                         entry.Entity.CreatedOn = DateTime.Now;
+                        entry.Entity.CreatedBy = _userService.GetCurrnetUserId();
                         break;
                     default:
                         break;
                 }
             }
 
-            return base.SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -8,6 +8,8 @@ import { MaterialModule } from '../shared/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { MainRoutingModule } from './main-routing.module';
 import { ContactComponent } from '../features/contact/contact.component';
+import { CheckoutFailComponent } from './checkoutfail/checkoutfail.component';
+import { CheckoutSucceededComponent } from './checkoutsucceeded/checkoutsucceeded.component';
 import { AdminComponent } from './admin/admin.component';
 import { FormsModule } from '@angular/forms';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -18,6 +20,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 		NavbarComponent,
 		HomeComponent,
 		NotFoundComponent,
+		CheckoutFailComponent,
+		CheckoutSucceededComponent,
  		 AdminComponent,
     UserProfileComponent,
 	],

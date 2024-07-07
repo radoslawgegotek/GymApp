@@ -9,5 +9,6 @@ namespace Gym.Model.Models
         public string Name { get; set; }
         [MaxLength(2048)]
         public string Description { get; set; }
+        public double Price { get; set; }
     }
 }
