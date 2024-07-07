@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 	styleUrl: './tickets.component.scss'
 })
 export class TicketsComponent implements OnInit {
+
 	ticketTypes: TicketTypeResponseDto[] = [];
 	selectedDate: Date | null = null;
 	dateForm: FormGroup;
@@ -28,16 +29,20 @@ export class TicketsComponent implements OnInit {
 		});
 	}
 
-	getPrice(ticketTypeId: number): string {
-		let basePrice = 100;
-		return `${basePrice + ((ticketTypeId - 1) * 20)} PLN`;
-	}
-
 	createSession(ticketTypeId: number) {
 		this.paymentsService.requestMemberSession(ticketTypeId, this.selectedDate!);
 	}
 
-	submit() {
+  getPrice(ticketTypeId: number): string {
+    let basePrice = 100;
+    return `${basePrice + ((ticketTypeId - 1) * 20)} PLN`;
+  }
 
-	}
+  submit() {
+    if (this.dateForm.valid) {
+      console.log('Wybrana data:', this.selectedDate);
+    } else {
+      console.log('Formularz jest nieprawidłowy');
+    }
+  }
 }

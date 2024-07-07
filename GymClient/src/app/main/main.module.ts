@@ -10,6 +10,9 @@ import { MainRoutingModule } from './main-routing.module';
 import { ContactComponent } from '../features/contact/contact.component';
 import { CheckoutFailComponent } from './checkoutfail/checkoutfail.component';
 import { CheckoutSucceededComponent } from './checkoutsucceeded/checkoutsucceeded.component';
+import { AdminComponent } from './admin/admin.component';
+import { FormsModule } from '@angular/forms';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
 	declarations: [
@@ -19,12 +22,15 @@ import { CheckoutSucceededComponent } from './checkoutsucceeded/checkoutsucceede
 		NotFoundComponent,
 		CheckoutFailComponent,
 		CheckoutSucceededComponent,
+ 		 AdminComponent,
+    UserProfileComponent,
 	],
 	imports: [
 		CommonModule,
 		BrowserModule,
 		MaterialModule,
-		MainRoutingModule
+		MainRoutingModule,
+		FormsModule, 
 	],
 	exports: [
 		NavbarComponent,

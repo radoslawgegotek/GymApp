@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 	private userSource = new ReplaySubject<UserInfo | null>(1);
 	public user$ = this.userSource.asObservable();
+	public currentUser: UserInfo | null = null;
 
 	constructor(private _http: HttpClient, private _router: Router) { }
 
@@ -65,6 +66,15 @@ export class AuthService {
 
 	public setUser(user: UserInfo | null) {
 		this.userSource.next(user);
+		this.currentUser = user;
+	}
+
+	public getCurrentUserId(): string | null {
+		return this.currentUser ? this.currentUser.id : null;
+	  }
+
+	public getCurrentUserEmail(): string | null {
+	return this.currentUser ? this.currentUser.email: null;
 	}
 
 	private getRefreshTokenFromCookie(): string | null {

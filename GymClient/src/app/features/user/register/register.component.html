@@ -1,1 +1,30 @@
-<p>register works!</p>
+<div class="container">
+    <mat-card>
+        <mat-card-header>Proszę się zarejestrować</mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="form">
+                <div>
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" />
+                        <mat-error *ngIf="form.get('email')?.hasError('required')">Email jest wymagany</mat-error>
+                        <mat-error *ngIf="form.get('email')?.hasError('email')">Niepoprawny email</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Hasło</mat-label>
+                        <input matInput formControlName="password" type="password" />
+                        <mat-error *ngIf="form.get('password')?.hasError('required')">Hasło jest wymagane</mat-error>
+                        <mat-error *ngIf="form.get('password')?.hasError('minlength') || form.get('password')?.hasError('maxlength')">Hasło musi mieć od 6 do 16 znaków</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-button (click)="registerUser()">
+                        <span>Zarejestruj się</span>
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

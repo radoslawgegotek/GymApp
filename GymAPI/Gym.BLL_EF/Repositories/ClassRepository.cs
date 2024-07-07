@@ -25,5 +25,16 @@ namespace Gym.BLL_EF.Repositories
                 .ToListAsync();
             return list;
         }
+
+        public async Task<List<Class>> GetClassesByClassId(int classId, PageProperties pageProperties)
+        {
+            int offset = (pageProperties.PageNumber - 1) * pageProperties.PageSize;
+            var list = await _context.Classes
+                .Where(x => x.Id == classId)
+                .Skip(offset)
+                .Take(pageProperties.PageSize)
+                .ToListAsync();
+            return list;
+        }
     }
 }
