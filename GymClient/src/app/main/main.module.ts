@@ -7,13 +7,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MaterialModule } from '../shared/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { MainRoutingModule } from './main-routing.module';
+import { ContactComponent } from '../features/contact/contact.component';
 
 @NgModule({
 	declarations: [
 		FooterComponent,
 		NavbarComponent,
 		HomeComponent,
-		NotFoundComponent
+		NotFoundComponent,
 	],
 	imports: [
 		CommonModule,

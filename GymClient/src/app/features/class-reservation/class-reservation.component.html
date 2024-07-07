@@ -1,0 +1,17 @@
+<div class="class-reservation-container">
+  <div class="city-buttons">
+    <button mat-raised-button *ngFor="let city of cities" (click)="showClasses(city)">
+      {{ city }}
+    </button>
+  </div>
+
+  <div class="classes-grid" *ngIf="classes.length > 0">
+    <button mat-raised-button *ngFor="let class of classes" (click)="reserveClass(class.id)">
+      <div>{{ class.name }}</div>
+      <div>{{ class.description }}</div>
+      <div>Miejsca: {{ class.slots }}</div>
+      <div>Start: {{ class.start | date:'short' }}</div>
+      <div>Koniec: {{ class.end | date:'short' }}</div>
+    </button>
+  </div>
+</div>

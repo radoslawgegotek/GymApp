@@ -24,14 +24,14 @@ namespace GymAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteClass(int id)
+        public async Task<IActionResult> DeleteClass(int id)
         {
             _classService.DeleteClass(id);
             return NoContent();
         }
 
         [HttpPut("{classId}")]
-        public IActionResult UpdateClass([FromRoute]int classId, [FromBody] ClassRequestDto classDto)
+        public async Task<IActionResult> UpdateClass([FromRoute]int classId, [FromBody] ClassRequestDto classDto)
         {
             _classService.UpdateClass(classId, classDto);
             return Ok();

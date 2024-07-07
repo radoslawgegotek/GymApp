@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { LoaderService } from '../../core/services/loader.service';
 import { AuthService } from '../../core/services/auth.service';
 
+
 @Component({
 	selector: 'app-navbar',
 	templateUrl: './navbar.component.html',

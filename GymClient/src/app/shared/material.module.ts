@@ -29,6 +29,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatTreeModule } from "@angular/material/tree";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const modules = [
 	MatButtonModule,
@@ -57,7 +58,8 @@ const modules = [
 	MatTreeModule,
 	MatCheckboxModule,
 	MatSnackBarModule,
-	MatProgressBarModule
+	MatProgressBarModule,
+	MatNativeDateModule
 ]
 
 @NgModule({
