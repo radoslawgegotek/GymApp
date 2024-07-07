@@ -1,7 +1,10 @@
+using Gym.BLL.IServices;
 using Gym.BLL_EF;
+using Gym.BLL_EF.Services;
 using Gym.DAL;
 using Gym.Model.Models;
 using Microsoft.Extensions.Configuration;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +14,14 @@ string connectionString = builder.Configuration.GetConnectionString("MSSQLConnec
                 ?? throw new InvalidOperationException("Connection string not found");
 
 builder.Services.AddBLL();
+builder.Services.AddScoped<ICurrentUserService, CurrnetUserService>();
 builder.Services.AddDAL(connectionString);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+
 
 builder.Services.AddCors(options =>
 {
@@ -40,7 +46,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

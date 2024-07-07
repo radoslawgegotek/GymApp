@@ -8,7 +8,8 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 
 @NgModule({
-	declarations: [],
+	declarations: [
+	],
 	providers: [
 		{
 			provide: HTTP_INTERCEPTORS,

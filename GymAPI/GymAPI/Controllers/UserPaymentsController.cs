@@ -1,7 +1,12 @@
-﻿using Gym.BLL.Dto.UserPayment;
+﻿using Gym.BLL.Dto;
+using Gym.BLL.Dto.UserPayment;
 using Gym.BLL.IServices;
+using Gym.Model.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Stripe;
+using Stripe.Checkout;
 
 namespace GymAPI.Controllers
 {
@@ -10,22 +15,75 @@ namespace GymAPI.Controllers
     public class UserPaymentsController : ControllerBase
     {
         private readonly IUserPaymentService _userPaymentService;
+        private readonly IOptions<StripeSettings> _settings;
+        private readonly ITicketTypeService _ticketTypeService;
+        private readonly ITicketService _ticketService;
 
-        public UserPaymentsController(IUserPaymentService userPaymentService)
+        public UserPaymentsController(
+            IUserPaymentService userPaymentService,
+            IOptions<StripeSettings> settings,
+            ITicketTypeService ticketTypeService,
+            ITicketService ticketService)
         {
             _userPaymentService = userPaymentService;
+            _settings = settings;
+            _ticketTypeService = ticketTypeService;
+            _ticketService = ticketService;
         }
 
         [HttpPost]
         public async Task<IActionResult> AddUserPayment([FromBody] UserPaymentRequestDto userPaymentDto)
         {
-            if (userPaymentDto == null)
+            var ticketType = await _ticketTypeService.GetTicketTypeById(userPaymentDto.TicketTypeId);
+            await _ticketService.AddTicket(new Gym.BLL.Dto.Ticket.TicketRequestDto
             {
-                return BadRequest("User payment data is null");
-            }
+                Title = ticketType.Name,
+                TicketTypeId = ticketType.Id,
+                ExpirationDate = userPaymentDto.ExpirationDate
+            });
 
-            await _userPaymentService.AddUserPayment(userPaymentDto);
-            return Ok();
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string>
+                {
+                  "card",
+                },
+                LineItems = new List<SessionLineItemOptions>(),
+                Mode = "payment",
+                SuccessUrl = "http://localhost:4200/checkout-succeeded",
+                CancelUrl = "http://localhost:4200/checkout-fail",
+            };
+
+            var sessionLineItem = new SessionLineItemOptions
+            {
+                PriceData = new SessionLineItemPriceDataOptions
+                {
+                    UnitAmount = (long)(ticketType.Price * 100),
+                    Currency = "pln",
+                    ProductData = new SessionLineItemPriceDataProductDataOptions
+                    {
+                        Name = ticketType.Name,
+                        Description = ticketType.Description
+                    },
+                },
+                Quantity = 1,
+            };
+            options.LineItems.Add(sessionLineItem);
+            var service = new SessionService();
+            try
+            {
+                var session = await service.CreateAsync(options);
+                return Ok(new CreateCheckoutSessionResponse
+                {
+                    SessionId = session.Id,
+                    PublicKey = _settings.Value.PublishableKey
+                });
+            }
+            catch (StripeException e)
+            {
+                Console.WriteLine(e.StripeError.Message);
+                return BadRequest();
+            }
         }
 
         [HttpGet("byUserId/{userId}")]

@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gym.BLL\Gym.BLL.csproj" />
     <ProjectReference Include="..\Gym.Model\Gym.Model.csproj" />
   </ItemGroup>
 

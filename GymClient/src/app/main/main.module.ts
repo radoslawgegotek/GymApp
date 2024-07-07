@@ -8,6 +8,8 @@ import { MaterialModule } from '../shared/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { MainRoutingModule } from './main-routing.module';
 import { ContactComponent } from '../features/contact/contact.component';
+import { CheckoutFailComponent } from './checkoutfail/checkoutfail.component';
+import { CheckoutSucceededComponent } from './checkoutsucceeded/checkoutsucceeded.component';
 
 @NgModule({
 	declarations: [
@@ -15,6 +17,8 @@ import { ContactComponent } from '../features/contact/contact.component';
 		NavbarComponent,
 		HomeComponent,
 		NotFoundComponent,
+		CheckoutFailComponent,
+		CheckoutSucceededComponent,
 	],
 	imports: [
 		CommonModule,
