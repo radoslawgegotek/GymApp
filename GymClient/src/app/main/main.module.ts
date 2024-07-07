@@ -8,6 +8,9 @@ import { MaterialModule } from '../shared/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { MainRoutingModule } from './main-routing.module';
 import { ContactComponent } from '../features/contact/contact.component';
+import { AdminComponent } from './admin/admin.component';
+import { FormsModule } from '@angular/forms';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
 	declarations: [
@@ -15,12 +18,15 @@ import { ContactComponent } from '../features/contact/contact.component';
 		NavbarComponent,
 		HomeComponent,
 		NotFoundComponent,
+ 		 AdminComponent,
+    UserProfileComponent,
 	],
 	imports: [
 		CommonModule,
 		BrowserModule,
 		MaterialModule,
-		MainRoutingModule
+		MainRoutingModule,
+		FormsModule, 
 	],
 	exports: [
 		NavbarComponent,

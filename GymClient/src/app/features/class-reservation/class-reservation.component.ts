@@ -22,7 +22,6 @@ export class ClassReservationComponent implements OnInit {
     this.reservationService.getClubs().subscribe((clubs: Club[]) => {
       this.clubs = clubs;
       this.cities = [...new Set(clubs.map(club => club.city))];
-      console.log('Lista miast:', this.cities); // Logowanie listy miast
     });
 
     this.authService.user$.subscribe(user => {
@@ -31,7 +30,7 @@ export class ClassReservationComponent implements OnInit {
   }
 
   showClasses(city: string): void {
-    console.log('Wybrane miasto:', city); // Logowanie wybranego miasta
+    console.log('Wybrane miasto:', city); 
     if (city) {
       this.fetchClassesByCity(city);
     }
@@ -39,11 +38,9 @@ export class ClassReservationComponent implements OnInit {
 
   fetchClassesByCity(city: string): void {
     const selectedClub = this.clubs.find(club => club.city === city);
-    console.log('Wybrany klub:', selectedClub ? selectedClub.name : 'Brak'); // Logowanie wybranego klubu
     if (selectedClub) {
       this.reservationService.getClassesByClubId(selectedClub.id).subscribe((classes: Class[]) => {
         this.classes = classes;
-        console.log('Pobrane zajęcia:', classes.map(c => c.name)); // Logowanie pobranych zajęć
       });
     } else {
       this.classes = [];
@@ -55,32 +52,41 @@ export class ClassReservationComponent implements OnInit {
       alert('Nie zalogowano użytkownika');
       return;
     }
-    const selectedClass = this.classes.find(c => c.id === classId);
 
-    
-    if (selectedClass && selectedClass.slots > 0) {
-      this.reservationService.getUserReservations(this.userId).subscribe(reservations => {
-        const alreadyReserved = reservations.some(reservation => reservation.classId === classId);
-        if (alreadyReserved) {
-          alert('Już masz rezerwację na te zajęcia');
-          return;
-        }})
-      const updatedClass = { ...selectedClass, slots: selectedClass.slots - 1 };
-      this.reservationService.reserveClass({ userId: this.userId, classId }).subscribe(() => {
-        this.reservationService.updateClass(updatedClass).subscribe(() => {
-          alert('Rezerwacja udana');
-          const selectedClub = this.clubs.find(club => club.id === selectedClass.id);
-          if (selectedClub) {
-            this.fetchClassesByCity(selectedClub.city);
-          }
-        }, () => {
-          alert('Aktualizacja slotów nieudana');
-        });
-      }, () => {
-        alert('Rezerwacja nieudana');
-      });
-    } else {
+    const selectedClass = this.classes.find(c => c.id === classId);
+  
+    if (!selectedClass || selectedClass.slots <= 0) {
       alert('Brak dostępnych miejsc');
+      return;
     }
+  
+    let canReserve = true;
+  
+    const userId: string = this.userId!; 
+    this.reservationService.getUserReservations(userId).subscribe(reservations => {
+      const alreadyReserved = reservations.some(reservation => reservation.classId === classId);
+      if (alreadyReserved) {
+        alert('Już masz rezerwację na te zajęcia');
+        canReserve = false;
+      }
+  
+      if (canReserve) {
+        const updatedClass = { ...selectedClass, slots: selectedClass.slots - 1 };
+        this.reservationService.reserveClass({ userId, classId }).subscribe(() => {
+          this.reservationService.updateClass(updatedClass).subscribe(() => {
+            alert('Rezerwacja udana');
+            const selectedClub = this.clubs.find(club => club.id === selectedClass.id);
+            if (selectedClub) {
+              this.fetchClassesByCity(selectedClub.city);
+            }
+          }, () => {
+            alert('Aktualizacja slotów nieudana');
+          });
+        }, () => {
+          alert('Rezerwacja nieudana');
+        });
+      }
+    });
   }
+  
 }

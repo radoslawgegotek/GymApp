@@ -1,0 +1,69 @@
+<div>
+    <h2>Dodaj klasę</h2>
+    <form (ngSubmit)="addClass()">
+      <input [(ngModel)]="classData.name" name="name" placeholder="Nazwa" required>
+      <input [(ngModel)]="classData.description" name="description" placeholder="Opis" required>
+      <input [(ngModel)]="classData.slots" type="number" name="slots" placeholder="Sloty" required>
+      <input [(ngModel)]="classData.start" type="datetime-local" name="start" placeholder="Start" required>
+      <input [(ngModel)]="classData.end" type="datetime-local" name="end" placeholder="Koniec" required>
+      <input [(ngModel)]="classData.clubId" type="number" name="clubId" placeholder="ID Klubu" required>
+      <button type="submit">Dodaj klasę</button>
+    </form>
+  </div>
+  
+  <div>
+    <h2>Usuń klasę</h2>
+    <input [(ngModel)]="deleteClassId" type="number" placeholder="ID klasy" required>
+    <button (click)="deleteClass()">Usuń klasę</button>
+  </div>
+  
+  <div>
+    <h2>Dodaj klub</h2>
+    <form (ngSubmit)="addClub()">
+      <input [(ngModel)]="clubData.name" name="name" placeholder="Nazwa" required>
+      <input [(ngModel)]="clubData.description" name="description" placeholder="Opis" required>
+      <input [(ngModel)]="clubData.city" name="city" placeholder="Miasto" required>
+      <input [(ngModel)]="clubData.address" name="address" placeholder="Adres" required>
+      <input [(ngModel)]="clubData.phoneNumber" name="phoneNumber" placeholder="Numer telefonu" required>
+      <button type="submit">Dodaj klub</button>
+    </form>
+  </div>
+  
+  <div>
+    <h2>Usuń klub</h2>
+    <input [(ngModel)]="deleteClubId" type="number" placeholder="ID klubu" required>
+    <button (click)="deleteClub()">Usuń klub</button>
+  </div>
+  
+  <div>
+    <h2>Dodaj typ biletu</h2>
+    <form (ngSubmit)="addTicketType()">
+      <input [(ngModel)]="ticketTypeData.name" name="name" placeholder="Nazwa" required>
+      <input [(ngModel)]="ticketTypeData.description" name="description" placeholder="Opis" required>
+      <button type="submit">Dodaj typ biletu</button>
+    </form>
+  </div>
+  
+  <div>
+    <h2>Usuń typ biletu</h2>
+    <input [(ngModel)]="deleteTicketTypeId" type="number" placeholder="ID typu biletu" required>
+    <button (click)="deleteTicketType()">Usuń typ biletu</button>
+  </div>
+  
+  <div>
+    <h2>Dodaj typ biletu do klubu</h2>
+    <form (ngSubmit)="addClubTicketType()">
+      <input [(ngModel)]="clubTicketTypeData.clubId" type="number" name="clubId" placeholder="ID Klubu" required>
+      <input [(ngModel)]="clubTicketTypeData.ticketTypeId" type="number" name="ticketTypeId" placeholder="ID Typu Biletu" required>
+      <button type="submit">Dodaj typ biletu do klubu</button>
+    </form>
+  </div>
+  
+  <div>
+    <h2>Usuń typ biletu z klubu</h2>
+    <input [(ngModel)]="deleteClubTicketTypeId" type="number" placeholder="ID typu biletu z klubu" required>
+    <button (click)="deleteClubTicketType()">Usuń typ biletu z klubu</button>
+  </div>
+<div>
+  <br><br><br><br><br>
+</div>
