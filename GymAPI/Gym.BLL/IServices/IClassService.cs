@@ -9,5 +9,6 @@ namespace Gym.BLL.IServices
         void DeleteClass(int id);
         void UpdateClass(int classId, ClassRequestDto classDto);
         Task<List<ClassResponseDto>> GetClasses(int clubId, PageProperties pageProperties);
+        Task<List<ClassResponseDto>> GetClassesById(int classId, PageProperties pageProperties);
     }
 }

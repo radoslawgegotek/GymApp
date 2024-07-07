@@ -48,5 +48,11 @@ namespace Gym.BLL_EF.Services
             var list = await _classRepository.GetClassesByGymId(clubId, pageProperties);
             return _mapper.Map<List<ClassResponseDto>>(list);
         }
+
+        public async Task<List<ClassResponseDto>> GetClassesById(int ClassId, PageProperties pageProperties)
+        {
+            var list = await _classRepository.GetClassesByClassId(ClassId, pageProperties);
+            return _mapper.Map<List<ClassResponseDto>>(list);
+        }
     }
 }

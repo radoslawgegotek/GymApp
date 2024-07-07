@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ClassResponseDto } from '../interface/class';
 
 export interface ClassDTO {
   name: string;
@@ -87,5 +88,9 @@ export class ApiService {
 
   getUserPayments(userId: string): Observable<Payment[]> {
     return this.http.get<Payment[]>(`${this.baseUrl}/UserPayments/byUserId/${userId}`);
+  }
+
+  getClassDetailsById(classId: number): Observable<ClassResponseDto> {
+    return this.http.get<ClassResponseDto>(`${this.baseUrl}/Classes/Club/User/${classId}`);
   }
 }

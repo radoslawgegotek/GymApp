@@ -73,6 +73,10 @@ export class AuthService {
 		return this.currentUser ? this.currentUser.id : null;
 	  }
 
+	public getCurrentUserEmail(): string | null {
+	return this.currentUser ? this.currentUser.email: null;
+	}
+
 	private getRefreshTokenFromCookie(): string | null {
 		const cookieString = document.cookie;
 		const cookieArray = cookieString.split('; ');

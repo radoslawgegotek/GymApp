@@ -1,20 +1,29 @@
 <div class="profile-container">
-    <div>        <button (click)="data()">Zaladuj dane</button></div>
-    <div class="left-side">
-      <h2>Rezerwacje</h2>
-      <ul>
-        <li *ngFor="let reservation of reservations">
-          Class ID: {{ reservation.classId }}
-        </li>
-      </ul>
+    <div class="button-container">
+        <button (click)="data()">Załaduj dane</button>
     </div>
-    <div class="right-side">
-        <h2>Płatności</h2>
-      <ul>
-        <li *ngFor="let payment of payments">
-          Kwota: {{ payment.price }} PLN
-        </li>
-      </ul>
+    <div class="content-container">
+        <div class="left-side">
+            <h2>Rezerwacje</h2>
+            <ul>
+                <li *ngFor="let reservation of reservations">
+                    <div *ngIf="getClassDetails(reservation.classId) as classDetails">
+                        <h3>{{ classDetails.name }}</h3>
+                        <p>{{ classDetails.description }}</p>
+                        <p>Sloty: {{ classDetails.slots }}</p>
+                        <p>Start: {{ classDetails.start | date:'short' }}</p>
+                        <p>Koniec: {{ classDetails.end | date:'short' }}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="right-side">
+            <h2>Płatności</h2>
+            <ul>
+                <li *ngFor="let payment of payments">
+                    Kwota: {{ payment.price }} PLN
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
-  
+</div>

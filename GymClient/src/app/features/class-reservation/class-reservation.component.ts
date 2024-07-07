@@ -30,7 +30,8 @@ export class ClassReservationComponent implements OnInit {
   }
 
   showClasses(city: string): void {
-    console.log('Wybrane miasto:', city); 
+    console.log('Wybrane miasto:', city);
+    alert(this.userId) 
     if (city) {
       this.fetchClassesByCity(city);
     }

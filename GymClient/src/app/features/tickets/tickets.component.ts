@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService, TicketTypeResponseDto } from '../../core/services/ticket.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -11,8 +12,13 @@ import { TicketService, TicketTypeResponseDto } from '../../core/services/ticket
 export class TicketsComponent implements OnInit {
   ticketTypes: TicketTypeResponseDto[] = [];
   selectedDate: Date | null = null;
+  dateForm: FormGroup;
 
-  constructor(private ticketService: TicketService) { }
+  constructor(private ticketService: TicketService, private fb: FormBuilder) { 
+    this.dateForm = this.fb.group({
+      date: [null, Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.ticketService.getTicketTypes().subscribe((data: TicketTypeResponseDto[]) => { 
@@ -23,5 +29,13 @@ export class TicketsComponent implements OnInit {
   getPrice(ticketTypeId: number): string {
     let basePrice = 100;
     return `${basePrice + ((ticketTypeId - 1) * 20)} PLN`;
+  }
+
+  submit() {
+    if (this.dateForm.valid) {
+      console.log('Wybrana data:', this.selectedDate);
+    } else {
+      console.log('Formularz jest nieprawidłowy');
+    }
   }
 }
