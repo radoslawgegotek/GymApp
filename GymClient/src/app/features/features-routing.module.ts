@@ -7,6 +7,7 @@ import { AuthGuard } from '../core/guards/auth.guard';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ContactComponent } from './contact/contact.component';
 import { ClassReservationComponent } from './class-reservation/class-reservation.component';
+import { FitnessCarouselComponent } from './fitness-carousel/fitness-carousel.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
 	{
 		path: 'contact',
 		component: ContactComponent
+	},
+	{
+		path: 'clubs',
+		component: FitnessCarouselComponent
 	},
 	{ 	path: 'reserve-class',
 		 component: ClassReservationComponent 

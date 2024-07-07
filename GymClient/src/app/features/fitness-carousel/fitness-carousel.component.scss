@@ -1,0 +1,41 @@
+// src/app/components/fitness-carousel/fitness-carousel.component.scss
+.carousel-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px; 
+  width: 800px;
+  background-color: #111111;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+  border: 1px solid transparent; 
+  align-items: center;
+  margin-top: 10%;
+
+  &:hover {
+    background-color: #141618;
+    border: 1px solid red; 
+  }
+}
+
+.carousel-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  h5 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 5px 0;
+    font-size: 1rem;
+  }
+}

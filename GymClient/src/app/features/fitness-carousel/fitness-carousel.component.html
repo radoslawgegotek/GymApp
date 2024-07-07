@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-center">
+  <ngb-carousel *ngIf="slides.length > 0">
+    <ng-template ngbSlide *ngFor="let slide of slides">
+       <div class="carousel-slide" (click)="onSlideClick(slide)">
+        <div class="carousel-content">
+          <h5>{{ slide.name }}</h5>
+          <p>City: {{ slide.city }}</p>
+          <p>Description: {{ slide.description }}</p>
+          <p>Address: {{ slide.address }}</p>
+          <p>Phone Number: {{ slide.phoneNumber }}</p>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  <div *ngIf="slides.length === 0">Loading...</div>
+</div>

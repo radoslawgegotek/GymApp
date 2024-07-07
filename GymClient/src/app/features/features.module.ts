@@ -8,6 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ContactComponent } from './contact/contact.component';
 import { ClassReservationComponent } from './class-reservation/class-reservation.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { FitnessCarouselComponent } from './fitness-carousel/fitness-carousel.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -17,15 +20,19 @@ import { ClassReservationComponent } from './class-reservation/class-reservation
 		RegisterComponent,
 		TicketsComponent,
 		ContactComponent,
-  ContactComponent,
-  ClassReservationComponent
+  		ContactComponent,
+  		ClassReservationComponent,
+		FitnessCarouselComponent
 	],
 	imports: [
 		CommonModule,
 		FeaturesRoutingModule,
 		ReactiveFormsModule,
 		FormsModule,
-		MaterialModule
+		MaterialModule,
+		CarouselModule.forRoot(),
+		CarouselModule,
+		NgbModule
 	]
 })
 export class FeaturesModule { }

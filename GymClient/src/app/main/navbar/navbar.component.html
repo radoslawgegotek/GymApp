@@ -7,8 +7,8 @@
 		</button>
 	</div>
 	<button mat-button
-	   [matMenuTriggerFor]="clubsMenu">
-	  <span>Kluby</span>
+		routerLink="clubs">
+		<span>Kluby</span>
 	</button>
 	<button mat-button
 		routerLink="reserve-class">
@@ -46,12 +46,6 @@
 	  </button>
 	</ng-container>
   </mat-toolbar>
-  
-  <mat-menu #clubsMenu="matMenu">
-	<button mat-menu-item>Katowice</button>
-	<button mat-menu-item>Warszawa</button>
-	<button mat-menu-item>Kraków</button>
-  </mat-menu>
   
   <ng-container *ngIf="loaderService.isLoading | async">
 	<div class="loader">

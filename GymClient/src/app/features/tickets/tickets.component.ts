@@ -1,32 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TicketService, TicketTypeResponseDto } from '../../core/services/ticket.service';
+
+
 
 @Component({
   selector: 'app-tickets',
   templateUrl: './tickets.component.html',
   styleUrl: './tickets.component.scss'
 })
-export class TicketsComponent {
-  slides = [
-    { title: 'przyklad 1', description: 'Opis biletu ' },
-    { title: 'przyklad 2', description: 'Opis biletu ' },
-    { title: 'przyklad 3', description: 'Opis biletu ' }
-  ];
+export class TicketsComponent implements OnInit {
+  ticketTypes: TicketTypeResponseDto[] = [];
+  selectedDate: Date | null = null;
 
-  selectedTicketType: string = 'A';
-  price: string = '100 PLN';
+  constructor(private ticketService: TicketService) { }
 
-  updatePrice() {
-    switch (this.selectedTicketType) {
-      case '1':
-        this.price = '100 PLN';
-        break;
-      case '2':
-        this.price = '150 PLN';
-        break;
-      case '3':
-        this.price = '200 PLN';
-        break;
-    }
+  ngOnInit(): void {
+    this.ticketService.getTicketTypes().subscribe((data: TicketTypeResponseDto[]) => { 
+      this.ticketTypes = data;
+    });
+  }
+
+  getPrice(ticketTypeId: number): string {
+    let basePrice = 100;
+    return `${basePrice + ((ticketTypeId - 1) * 20)} PLN`;
   }
 }
-

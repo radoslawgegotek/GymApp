@@ -1,25 +1,41 @@
 .class-reservation-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-  }
-  
-  .mat-form-field {
-    width: 300px;
-    margin-bottom: 20px;
-  }
-  
-  .classes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-  }
-  
-  button {
-    text-align: center;
-    padding: 20px;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.city-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+button {
+  height: auto;
+  text-align: center;
+  padding: 20px;
+  width: auto;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 10px;
+  background-color: red;
+}
+
+.mat-form-field {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+button mat-raised-button {
+  width: auto;
+}
